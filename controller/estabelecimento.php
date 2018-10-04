@@ -14,6 +14,7 @@
 								<th>Nome fantasia</th>
 								<th>CNPJ</th>
 								<th>Categoria</th>
+								<th>Ag Cc</th>
 							</tr>
 						</thead>
 						<tbody>";
@@ -24,6 +25,7 @@
 								<td>".$v['nomeFantasia']."</td>
 								<td>".$v['cnpj']."</td>
 								<td>".$v['categoria']."</td>
+								<td>".$v['contas']."</td>
 							</tr>";
 			}
 
@@ -50,10 +52,8 @@
 		}
 
 		function verificarAlterarCadastrar(){
-			var_dump($_POST);
-			die;
 			if (trim($_POST['txtRazao']) == '' || trim($_POST['txtCNPJ']) == '') {
-				die(-1);
+				die("Falta dados");
 			}
 
 			$razao = strtolower(trim($_POST['txtRazao']));
@@ -97,15 +97,21 @@
 			}
 
 			if ($_POST['idEstabelecimento'] == 0) {
-				return $estabelecimento->cadastrar();
+				$estabelecimento->cadastrar();
+				$id = $estabelecimento->buscarId();
+				if (!isset($id->id)) {
+					die("Erro ao cadastrar contas");
+				}
+				$estabelecimento->setId($id->id);
 			}
 			else{
 				$estabelecimento->setId($_POST['idEstabelecimento']);
 				$estabelecimento->alterar();
 
-				$conta = New ContaController();
-				return $conta->alterarContas($_POST['idEstabelecimento']);
 			}
+
+			$conta = New ContaController();
+			return $conta->alterarContas($estabelecimento->getId());
 		}
 
 		function validarDuplicados($id, $cnpj, $razao, $fantasia){

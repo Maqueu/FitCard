@@ -2,6 +2,7 @@
 	require_once "controller/estabelecimento.php";
 	require_once "controller/estado.php";
 	require_once "controller/categoria.php";
+	require_once "controller/conta.php";
 	$estabelecimento = New EstabelecimentoController();
 	$id = (isset($_POST['id']) && is_numeric($_POST['id']) ? $_POST['id'] : 0);
 	$d = $estabelecimento->buscarDados($id);
@@ -58,20 +59,26 @@
 		<input type="text" name="txtCidade" id="txtCidade" value="<?= $d->cidade ?>">
 	</div>
 	<hr>
-	<div id="listaContas"></div>
-	<div id="modeloConta" hidden="">
+	<div id="listaContas">
 		<?php
-			$htmlConta = file_get_contents('modelo_agencia_conta.html');
-			$htmlConta = str_replace('@id', 0, $htmlConta);
-			$htmlConta = str_replace('@agencia', '', $htmlConta);
-			$htmlConta = str_replace('@conta', '', $htmlConta);
-
-			echo $htmlConta;
+			if ($id != 0) {
+				echo ContaController::listarContas($id);
+			}
 		?>
 	</div>
 	<button type="button" id="btnConta">+ Conta</button>
 	<button type="button" id="btnSalvar"><?= ($id == 0 ? "Cadastrar" : "Alterar") ?></button>
 </form>
+<div id="modeloConta" hidden="">
+	<?php
+		$htmlConta = file_get_contents('modelo_agencia_conta.html');
+		$htmlConta = str_replace('@id', 0, $htmlConta);
+		$htmlConta = str_replace('@agencia', '', $htmlConta);
+		$htmlConta = str_replace('@conta', '', $htmlConta);
+
+		echo $htmlConta;
+	?>
+</div>
 <?php
 	if ($d->dataCadastro && $d->horaCadastro) { ?>
 		<div>Cadastrado: <?= date('d/m/Y', strtotime($d->dataCadastro)) ?> às <?= date('H:i:s', strtotime($d->horaCadastro)) ?></div>

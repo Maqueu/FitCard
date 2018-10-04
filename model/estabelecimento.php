@@ -52,7 +52,16 @@
 												razaoSocial,
 												nomeFantasia,
 										        cnpj,
-										        (SELECT categoria FROM categorias c WHERE c.id = e.idCategoria) categoria
+										        (SELECT categoria FROM categorias c WHERE c.id = e.idCategoria) categoria,
+										        (
+										        	SELECT 	GROUP_CONCAT(
+										        				CONCAT(
+										        					'<div>', agencia, ' ', conta, '</div>'
+										        				) ORDER BY agencia, conta SEPARATOR ' '
+										        			)
+										        		FROM contas c 
+										        		WHERE c.idEstabelecimento = e.id
+										        ) contas
 											FROM estabelecimentos e
 										    ORDER BY razaoSocial";
 
@@ -118,6 +127,7 @@
 			if ($que_updEstabelecimento->execute()) {
 				return 1;
 			}
+			return "Erro ao alterar estabelecimento";
 		}
 
 		function cadastrar(){
@@ -174,6 +184,7 @@
 			if ($que_addEstabelecimento->execute()) {
 				return 1;
 			}
+			return "Erro ao cadastrar estabelecimento";
 		}
 
 		function validarDuplicados(){
@@ -193,6 +204,19 @@
 
 			if ($que_chkDuplicado->execute()) {
 				return $que_chkDuplicado->fetchObject();
+			}
+			return -1;
+		}
+
+		function buscarId(){
+			$sql_selId = "SELECT id FROM estabelecimentos WHERE cnpj = :cnpj";
+
+			global $conn;
+			$que_selId = $conn->prepare($sql_selId);
+			$que_selId->bindParam('cnpj', $this->cnpj, PDO:: PARAM_STR);
+
+			if ($que_selId->execute()) {
+				return $que_selId->fetchObject();
 			}
 			return -1;
 		}
