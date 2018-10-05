@@ -55,6 +55,10 @@
 		<input type="text" name="txtComplemento" id="txtComplemento" value="<?= $d->complemento ?>">
 	</div>
 	<div>
+		<label for="txtTelefone">Telefone</label>
+		<input type="text" name="txtTelefone" id="txtTelefone" value="<?= $d->telefone ?>">
+	</div>
+	<div>
 		<label for="txtCidade">Cidade</label>
 		<input type="text" name="txtCidade" id="txtCidade" value="<?= $d->cidade ?>">
 	</div>
@@ -93,7 +97,45 @@
 ?>
 
 <script type="text/javascript">
+	$(() => {
+		$('#txtCNPJ').mask('00.000.000/0000-00');
+		$('#txtTelefone').mask('(99)99999-9999');
+	});
+
+	function erroFormulario(texto, qual){
+		swal({
+			title: "Opps...", 
+			text: texto,
+			type: "error"
+		}).then(() => qual.focus())
+	}
+
+	function isEmail(email) {
+	    var re = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	    return re.test(email);
+	}
+
 	$('#btnSalvar').click(function(){
+		if ($('#txtCNPJ').val().length < 18) {
+			erroFormulario('Preencha o CNPJ', $('#txtCNPJ'))
+			return;
+		}
+
+		if ($('#txtRazao').val().trim() == '') {
+			erroFormulario('Preencha a Razão Social', $('#txtRazao'));
+			return
+		}
+
+		if ($('#selCategoria').val() == 1 && $('#txtTelefone').val().length < 14) {
+			erroFormulario('Preencha o telefone', $('#txtTelefone'));
+			return;
+		}
+
+		if ($('#txtEmail').val().trim() != '' && !isEmail($('#txtEmail').val().trim())) {
+			erroFormulario('E-mail inválido', $('#txtEmail'));
+			return;
+		}
+
 		$.ajax({
 			type: 'post',
 			url: 'ajax_estabelecimento.php',
@@ -101,30 +143,56 @@
 			success: (erro) => {
 				if (erro == 1) {
 					$('#modal').html('');
-					atualizarEstabelecimentos();
+					swal({
+						title: "Sucesso",
+						text: "Dados " + (<?= $id ?> == 0 ? "cadastrados" : "alterados"),
+						type: "success"
+					}).then(() => atualizarEstabelecimentos());
 				}
 				else{
-					alert(erro)
+					swal({
+						title: "Opps...", 
+						text: erro,
+						type: "error"
+					});
 				}
 			}
 		})
 	});
 
 	$('#btnAlterarStatus').click(function(){
-		$.ajax({
-			type: 'post',
-			url: 'ajax_estabelecimento.php',
-			data: 'acao=5&id=' + <?= $id ?>,
-			success: (erro) => {
-				if (erro == 1) {
-					$('#modal').html('');
-					atualizarEstabelecimentos();
-				}
-				else{
-					alert(erro)
-				}
-			}
-		})
+		swal({
+                title: 'Deletar',
+                text: "Deseja realmente deletar este estabelecimento?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+            }
+        ).then((result) => {
+            if (result.value) {
+				$.ajax({
+					type: 'post',
+					url: 'ajax_estabelecimento.php',
+					data: 'acao=5&id=' + <?= $id ?>,
+					success: (erro) => {
+						if (erro == 1) {
+							$('#modal').html('');
+							atualizarEstabelecimentos();
+						}
+						else{
+							swal({
+								title: "Opps...", 
+								text: erro,
+								type: "error"
+							})
+						}
+					}
+				})
+            }
+        })
 	})
 
 	$('#btnConta').click(() => addConta());

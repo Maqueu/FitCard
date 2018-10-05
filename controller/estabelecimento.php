@@ -47,7 +47,7 @@
 				$d = New StdClass();
 				$d->siglaEstado = "0";
 				$d->razaoSocial = $d->nomeFantasia = $d->cnpj = $d->email = $d->rua = $d->numero = 
-				$d->complemento = $d->cidade = $d->dataCadastro = $d->horaCadastro = "";
+				$d->complemento = $d->cidade = $d->dataCadastro = $d->horaCadastro = $d->telefone = "";
 			}
 			else{
 				$estabelecimento = New Estabelecimento();
@@ -63,6 +63,11 @@
 				die("Falta dados");
 			}
 
+			require_once 'controller/cnpj.php';
+			if (!CNPJ::validar($_POST['txtCNPJ'])) {
+				die("CNPJ inválido");
+			}
+
 			$razao = strtolower(trim($_POST['txtRazao']));
 			$fantasia = strtolower(trim($_POST['txtFantasia']));
 
@@ -76,6 +81,7 @@
 			$numero = strtolower(trim($_POST['txtNumero']));
 			$complemento = strtolower(trim($_POST['txtComplemento']));
 			$cidade = strtolower(trim($_POST['txtCidade']));
+			$telefone = (strlen($_POST['txtTelefone']) < 14 ? null : $_POST['txtTelefone']);
 
 			$estabelecimento = New Estabelecimento();
 			$estabelecimento->setEstado(($_POST['selEstado'] ? $_POST['selEstado'] : null));
@@ -101,6 +107,9 @@
 			}
 			if ($cidade) {
 				$estabelecimento->setCidade($cidade);
+			}
+			if ($telefone) {
+				$estabelecimento->setTelefone($telefone);
 			}
 
 			if ($_POST['idEstabelecimento'] == 0) {

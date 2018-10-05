@@ -9,6 +9,7 @@
 		private $rua = null;
 		private $numero = null;
 		private $complemento = null;
+		private $telefone = null;
 		private $cidade = null;
 		private $estado = null;
 		private $categoria = null;
@@ -34,6 +35,9 @@
 
 		function setComplemento($complemento){$this->complemento = $complemento;}
 		function getComplemento(){return $this->complemento;}
+
+		function setTelefone($telefone){$this->telefone = $telefone;}
+		function getTelefone(){return $this->telefone;}
 
 		function setCidade($cidade){$this->cidade = $cidade;}
 		function getCidade(){return $this->cidade;}
@@ -81,6 +85,7 @@
 							        rua,
 							        numero,
 							        complemento,
+							        telefone,
 							        cidade,
 							        ativo,
 							        dataCadastro,

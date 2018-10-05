@@ -23,7 +23,9 @@
 		<div id="modal"></div>
 
 
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/sweetalert2.js"></script>
+		<script type="text/javascript" src="js/jquery.mask.js"></script>
 		<script type="text/javascript">
 			$('body').on('click', '[id^=trEstabelecimento]', function(){
 				exibirEstabelecimento($(this).attr('id').substring($(this).attr('id').lastIndexOf('o') + 1));
@@ -36,7 +38,11 @@
 					type: 'post',
 					url: 'ajax_estabelecimento.php',
 					data: 'acao=1&id=' + id,
-					success: (modal) => $('#modal').html(modal)
+					success: (modal) => {
+						$('#modal').html(modal)
+						$('[name^="txtAgencia"]').mask('999-9');
+						$('[name^="txtConta"]').mask('99.999-9');
+					}
 				})
 			}
 
