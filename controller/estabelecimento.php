@@ -7,30 +7,37 @@
 		static function listarEstabelecimentos(){
 			$estabelecimento = New Estabelecimento();
 
-			$html = "<table width=\"100%\">
-						<thead>
-							<tr>
-								<th>Razão Social</th>
-								<th>Nome fantasia</th>
-								<th>CNPJ</th>
-								<th>Categoria</th>
-								<th>Ag Cc</th>
-							</tr>
-						</thead>
-						<tbody>";
-
-			foreach ($estabelecimento->listarEstabelecimentos() as $v) {
-				$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
-								<td>".$v['razaoSocial']."</td>
-								<td>".$v['nomeFantasia']."</td>
-								<td>".$v['cnpj']."</td>
-								<td>".$v['categoria']."</td>
-								<td>".$v['contas']."</td>
-							</tr>";
+			$html = 	"<table width=\"100%\">
+							<thead>
+								<tr>
+									<th align=\"left\">Razão Social</th>
+									<th align=\"left\">Nome fantasia</th>
+									<th align=\"left\">CNPJ</th>
+									<th align=\"left\">Categoria</th>
+									<th align=\"left\">Ag Cc</th>
+								</tr>
+							</thead>
+							<tbody>";
+			$e = $estabelecimento->listarEstabelecimentos();
+			if ($e) {
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td>".$v['razaoSocial']."</td>
+									<td>".$v['nomeFantasia']."</td>
+									<td>".$v['cnpj']."</td>
+									<td>".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+			}
+			else{
+				$html .= 		"<tr>
+									<td colspan=\"5\" align=\"center\">Nenhum estabelecimento encontrado</td>
+								</tr>";
 			}
 
-			$html .= 	"</tbody>
-					</table>";
+			$html .= 		"</tbody>
+						</table>";
 
 			return $html;
 		}
@@ -110,8 +117,12 @@
 
 			}
 
-			$conta = New ContaController();
-			return $conta->alterarContas($estabelecimento->getId());
+			if (isset($_POST['txtAgencia']) && isset($_POST['txtConta'])) {
+				$conta = New ContaController();
+				return $conta->alterarContas($estabelecimento->getId(), $_POST['txtAgencia'], $_POST['txtConta']);
+			}
+			return 1;
+
 		}
 
 		function validarDuplicados($id, $cnpj, $razao, $fantasia){
@@ -146,6 +157,13 @@
 					}
 				}
 			}
+		}
+
+		function alterarStatus($id){
+			$estabelecimento = New Estabelecimento();
+			$estabelecimento->setId($id);
+
+			return $estabelecimento->alterarStatus();
 		}
 	}
 ?>

@@ -3,10 +3,10 @@
 
 	class ContaController{
 
-		function alterarContas($estabelecimento){
+		function alterarContas($estabelecimento, $agencia, $contaP){
 			$conta = New Conta();
-			$conta->setAgencia($_POST['txtAgencia']);
-			$conta->setConta($_POST['txtConta']);
+			$conta->setAgencia($agencia);
+			$conta->setConta($contaP);
 			$conta->setEstabelecimento($estabelecimento);
 
 			return $conta->alterarContas();

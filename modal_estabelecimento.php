@@ -68,6 +68,12 @@
 	</div>
 	<button type="button" id="btnConta">+ Conta</button>
 	<button type="button" id="btnSalvar"><?= ($id == 0 ? "Cadastrar" : "Alterar") ?></button>
+	<?php
+		if ($id != 0) { ?>
+			<button type="button" id="btnAlterarStatus"><?= ($d->ativo ? "Deletar" : "Reativar") ?></button>
+	<?php
+		}
+	?>
 </form>
 <div id="modeloConta" hidden="">
 	<?php
@@ -103,6 +109,23 @@
 			}
 		})
 	});
+
+	$('#btnAlterarStatus').click(function(){
+		$.ajax({
+			type: 'post',
+			url: 'ajax_estabelecimento.php',
+			data: 'acao=5&id=' + <?= $id ?>,
+			success: (erro) => {
+				if (erro == 1) {
+					$('#modal').html('');
+					atualizarEstabelecimentos();
+				}
+				else{
+					alert(erro)
+				}
+			}
+		})
+	})
 
 	$('#btnConta').click(() => addConta());
 	addConta = () => $('#listaContas').append($('#modeloConta').html());

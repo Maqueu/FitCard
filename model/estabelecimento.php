@@ -52,17 +52,17 @@
 												razaoSocial,
 												nomeFantasia,
 										        cnpj,
-										        (SELECT categoria FROM categorias c WHERE c.id = e.idCategoria) categoria,
+										        (SELECT categoria FROM fit_categorias c WHERE c.id = e.idCategoria) categoria,
 										        (
 										        	SELECT 	GROUP_CONCAT(
 										        				CONCAT(
 										        					'<div>', agencia, ' ', conta, '</div>'
 										        				) ORDER BY agencia, conta SEPARATOR ' '
 										        			)
-										        		FROM contas c 
+										        		FROM fit_contas c 
 										        		WHERE c.idEstabelecimento = e.id
 										        ) contas
-											FROM estabelecimentos e
+											FROM fit_estabelecimentos e
 										    ORDER BY razaoSocial";
 
 			global $conn;
@@ -82,9 +82,10 @@
 							        numero,
 							        complemento,
 							        cidade,
+							        ativo,
 							        dataCadastro,
 							        horaCadastro
-								FROM estabelecimentos
+								FROM fit_estabelecimentos
 							    WHERE id = :id";
 
 			global $conn;
@@ -96,18 +97,18 @@
 		}
 
 		function alterar(){
-			$sql_updEstabelecimento = "UPDATE estabelecimentos SET 	siglaEstado = :estado,
-																	idCategoria = :categoria,
-																	razaoSocial = :razao,
-																	nomeFantasia = :fantasia,
-																	cnpj = :cnpj,
-																	email = :email,
-																	rua = :rua,
-																	numero = :numero,
-																	complemento = :complemento,
-																	telefone = :telefone,
-																	cidade = :cidade
-																WHERE id = :id";
+			$sql_updEstabelecimento = "UPDATE fit_estabelecimentos SET 	siglaEstado = :estado,
+																		idCategoria = :categoria,
+																		razaoSocial = :razao,
+																		nomeFantasia = :fantasia,
+																		cnpj = :cnpj,
+																		email = :email,
+																		rua = :rua,
+																		numero = :numero,
+																		complemento = :complemento,
+																		telefone = :telefone,
+																		cidade = :cidade
+																	WHERE id = :id";
 
 			global $conn;
 			$que_updEstabelecimento = $conn->prepare($sql_updEstabelecimento);
@@ -134,36 +135,36 @@
 			$dia = date('Y-m-d');
 			$hora = date('H:i:s');
 
-			$sql_addEstabelecimento = "INSERT INTO estabelecimentos (
-																		siglaEstado,
-																		idCategoria,
-																		razaoSocial,
-																		nomeFantasia,
-																		cnpj,
-																		email,
-																		rua,
-																		numero,
-																		complemento,
-																		telefone,
-																		cidade,
-																		dataCadastro,
-																		horaCadastro
-																	) 
-																VALUES 	(
-																			:estado,
-																			:categoria,
-																			:razao,
-																			:fantasia,
-																			:cnpj,
-																			:email,
-																			:rua,
-																			:numero,
-																			:complemento,
-																			:telefone,
-																			:cidade,
-																			:dia,
-																			:hora
-																		)";
+			$sql_addEstabelecimento = "INSERT INTO fit_estabelecimentos (
+																			siglaEstado,
+																			idCategoria,
+																			razaoSocial,
+																			nomeFantasia,
+																			cnpj,
+																			email,
+																			rua,
+																			numero,
+																			complemento,
+																			telefone,
+																			cidade,
+																			dataCadastro,
+																			horaCadastro
+																		) 
+																	VALUES 	(
+																				:estado,
+																				:categoria,
+																				:razao,
+																				:fantasia,
+																				:cnpj,
+																				:email,
+																				:rua,
+																				:numero,
+																				:complemento,
+																				:telefone,
+																				:cidade,
+																				:dia,
+																				:hora
+																			)";
 
 			global $conn;
 			$que_addEstabelecimento = $conn->prepare($sql_addEstabelecimento);
@@ -190,7 +191,7 @@
 		function validarDuplicados(){
 			$whereFantasia = ($this->fantasia ? "nomeFantasia = :fantasia" : "nomeFantasia IS NULL");
 			$sql_chkDuplicado = "SELECT IF(cnpj = :cnpj, 1, 2) erro
-									FROM estabelecimentos
+									FROM fit_estabelecimentos
 								    WHERE (cnpj = :cnpj OR (razaoSocial = :razao AND {$whereFantasia})) AND id <> :id";
 
 			global $conn;
@@ -209,7 +210,7 @@
 		}
 
 		function buscarId(){
-			$sql_selId = "SELECT id FROM estabelecimentos WHERE cnpj = :cnpj";
+			$sql_selId = "SELECT id FROM fit_estabelecimentos WHERE cnpj = :cnpj";
 
 			global $conn;
 			$que_selId = $conn->prepare($sql_selId);
@@ -219,6 +220,18 @@
 				return $que_selId->fetchObject();
 			}
 			return -1;
+		}
+
+		function alterarStatus(){
+			$sql_updStatus = "UPDATE fit_estabelecimentos SET ativo = IF(ativo, 0, 1) WHERE id = :id";
+
+			global $conn;
+			$que_updStatus = $conn->prepare($sql_updStatus);
+			$que_updStatus->bindParam('id', $this->id, PDO:: PARAM_INT);
+
+			if ($que_updStatus->execute()) {
+				return 1;
+			}
 		}
 	}
 ?>

@@ -5,7 +5,7 @@
 		function listarCategorias(){
 			$sql_selCategorias = "SELECT 	id, 
 											categoria
-										FROM categorias
+										FROM fit_categorias
 									    ORDER BY categoria";
 
 			global $conn;

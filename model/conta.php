@@ -18,14 +18,14 @@
 
 		function alterarContas(){
 			if ($this->agencia && is_array($this->agencia) && $this->conta && is_array($this->conta)) {
-				$sql_delContas = "DELETE FROM contas WHERE idEstabelecimento = :estabelecimento";
+				$sql_delContas = "DELETE FROM fit_contas WHERE idEstabelecimento = :estabelecimento";
 
 				global $conn;
 				$que_delContas = $conn->prepare($sql_delContas);
 				$que_delContas->bindParam('estabelecimento', $this->estabelecimento, PDO:: PARAM_INT);
 
 				if ($que_delContas->execute()) {
-					$sql_addConta = "INSERT INTO contas (
+					$sql_addConta = "INSERT INTO fit_contas (
 															idEstabelecimento,
 															agencia,
 															conta
@@ -60,7 +60,7 @@
 			$sql_selContas = "SELECT 	id,
 										agencia,
 										conta
-									FROM contas 
+									FROM fit_contas 
 									WHERE idEstabelecimento = :id";
 
 			global $conn;

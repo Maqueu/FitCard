@@ -6,7 +6,7 @@
 			$sql_selEstado = "SELECT	sigla,
 										estado,
 								        IF(sigla = 'NN', 1, 0) ordenar -- Colocar no ultimo
-									FROM estados
+									FROM fit_estados
 								    ORDER BY ordenar, estado;";
 
 			global $conn;

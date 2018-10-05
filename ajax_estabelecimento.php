@@ -31,5 +31,10 @@
 			$estabelecimento = New EstabelecimentoController();
 			echo json_encode($estabelecimento->buscarDados($_POST['id']));
 		break;
+
+		case 5: // Altera status (Ativo/Inativo) 
+			$estabelecimento = New EstabelecimentoController();
+			echo $estabelecimento->alterarStatus($_POST['id']);
+		break;
 	}
 ?>
