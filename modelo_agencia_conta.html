@@ -1,16 +1,21 @@
 <div class="remover">
 	<div class="row">
-		<div class="col-md-5">
-			<label for="txtAgencia">Agencia</label>
-			<input type="text" class="form-control" name="txtAgencia[]" value="@agencia">
+		<div class="col-md-11">
+			<div class="row">
+				<div class="col-md-6">
+					<label for="txtAgencia">Agencia</label>
+					<input type="text" class="form-control" name="txtAgencia[]" value="@agencia">
+				</div>
+				<input type="hidden" name="idConta[]" value="@id">
+				<div class="col-md-6">
+					<label for="txtConta">Conta</label>
+					<input type="text" class="form-control" name="txtConta[]" value="@conta">
+				</div>
+			</div>
 		</div>
-		<input type="hidden" name="idConta[]" value="@id">
-		<div class="col-md-5">
-			<label for="txtConta">Conta</label>
-			<input type="text" class="form-control" name="txtConta[]" value="@conta">
-		</div>
-		<div class="col-md-2" style="align-self: center;">
-			<button type="button" class="btnRemover">- Remover</button>
+		<div class="col-md-1 btnRemover" align="center" style="align-self: center;">
+			<!-- <button type="button">- Remover</button> -->
+			<span>X</span>
 		</div>
 	</div>
 </div>

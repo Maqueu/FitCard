@@ -55,8 +55,30 @@
 		function setAtivo($ativo){$this->ativo = $ativo;}
 		function getAtivo(){return $this->ativo;}
 
-		function listarEstabelecimentos(){
+		function listarEstabelecimentos($order = 0, $desc = 0){
 			$where = ($this->ativo != -1 ? "AND ativo = :ativo" : "");
+			switch ($order) {
+				case 0:
+					$order = 'razaoSocial';
+				break;
+
+				case 1:
+					$order = 'nomeFantasia';
+				break;
+
+				case 2:
+					$order = 'cnpj';
+				break;
+
+				case 3:
+					$order = 'categoria';
+				break;
+
+				default:
+					$order = 'razaoSocial';
+				break;
+			}
+			$desc = ($desc ? 'DESC' : '');
 			$sql_selEstabelecimento = "SELECT 	id,
 												razaoSocial,
 												nomeFantasia,
@@ -77,7 +99,7 @@
 										        ) contas
 											FROM fit_estabelecimentos e
 											WHERE 1 = 1 {$where}
-										    ORDER BY razaoSocial";
+										    ORDER BY {$order} {$desc}";
 
 			global $conn;
 			$que_selEstabelecimento = $conn->prepare($sql_selEstabelecimento);

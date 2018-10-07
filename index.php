@@ -23,7 +23,7 @@
 				border-bottom: 1px solid #159957;
 			}
 
-			#tblEstabelecimento tr{
+			#tblEstabelecimento tr, .topoFixo tr{
 				cursor: pointer !important;
 			}
 
@@ -31,9 +31,13 @@
 				margin-bottom: 15px;
 			}
 
+			#tblEstabelecimento tbody{
+			    background-color: rgba(21, 153, 87, 0.05);
+			}
+
 			#tblEstabelecimento tr td{
 				/*border-bottom: 1px solid black;*/
-				border-bottom: 1px solid rgba(165, 35, 26);
+				border-bottom: 1px solid rgb(165, 35, 26);
 				padding-bottom: 5px;
 			}
 
@@ -71,7 +75,7 @@
 			}
 
 			.agenciaConta:last-child{
-				border: none;
+				border: none !important;
 			}
 
 			.tresPontinhos{
@@ -94,9 +98,46 @@
 			    color: white;
 			}
 
+			#footerModal{
+			    background: linear-gradient(140deg, #074023, #159957);
+			    -webkit-background: linear-gradient(140deg, #074023, #159957);
+			    -moz-background: linear-gradient(140deg, #074023, #159957);
+			    -ms-background: linear-gradient(140deg, #074023, #159957);
+			    -o-background: linear-gradient(140deg, #074023, #159957);
+			}
+
+			#bodyModal{
+				background-color: white;
+			    background: linear-gradient(-45deg, rgba(21, 153, 87, 0.2), #fff, #fff, rgba(255, 79, 79, 0.2));
+			    -webkit-background: linear-gradient(-45deg, rgba(21, 153, 87, 0.2), #fff, #fff, rgba(255, 79, 79, 0.2));
+			    -moz-background: linear-gradient(-45deg, rgba(21, 153, 87, 0.2), #fff, #fff, rgba(255, 79, 79, 0.2));
+			    -ms-background: linear-gradient(-45deg, rgba(21, 153, 87, 0.2), #fff, #fff, rgba(255, 79, 79, 0.2));
+			    -o-background: linear-gradient(-45deg, rgba(21, 153, 87, 0.2), #fff, #fff, rgba(255, 79, 79, 0.2));
+			}
+
 			#filtro{
 				margin: 15px 0;
 			}
+
+			[name="checkOrdenar"] + i, [name="checkOrdenarT"] + i{
+				display: none;
+				transition: transform 1s;
+				-webkit-transition: -webkit-transform 1s;
+				-moz-transition: -moz-transform 1s;
+				-ms-transition: -ms-transform 1s;
+				-o-transition: -o-transform 1s;
+			}
+			[name="checkOrdenar"]:checked + i, [name="checkOrdenarT"]:checked + i{
+				display: inline-block;
+			}
+			[name="checkOrdenar"][desc="1"] + i, [name="checkOrdenarT"][desc="1"] + i{
+				transform: rotateZ(180deg);
+				-webkit-transform: rotateZ(180deg);
+				-moz-transform: rotateZ(180deg);
+				-ms-transform: rotateZ(180deg);
+				-o-transform: rotateZ(180deg);
+			}
+
 
 			.topoFixo table{
 				table-layout: fixed;
@@ -111,99 +152,96 @@
 			    box-shadow: 0 3px 2px 0 #074828;
 			}
 
+			.btnRemover{
+				cursor: pointer;
+			}
+			.btnRemover span{
+				color: red;
+				font-style: italic;
+				font-weight: 900;
+			}
 
+			.topoFixo::-webkit-scrollbar {
+				height: 0px !important;
+			}
+			.topoFixo::-moz-scrollbar {
+				height: 0px !important;
+			}
+			.topoFixo::-ms-scrollbar {
+				height: 0px !important;
+			}
+			.topoFixo::-o-scrollbar {
+				height: 0px !important;
+			}
 
-.topoFixo::-webkit-scrollbar {
-	height: 0px !important;
-}
-.topoFixo::-moz-scrollbar {
-	height: 0px !important;
-}
-.topoFixo::-ms-scrollbar {
-	height: 0px !important;
-}
-.topoFixo::-o-scrollbar {
-	height: 0px !important;
-}
-
-
-
-
-
-::-webkit-scrollbar {
-    width: 10px;
-    height: 12px;
-}
-::-webkit-scrollbar-thumb {
-    background-color: #159957;
-    border-radius: 20px;
-    box-shadow: 1px -2px 0 black, 1px 2px 0 black;
-}
-::-webkit-scrollbar-track {
-    background-color: #074023;
-}
-::-webkit-scrollbar-button{
-	background: #159957;
-}
-
-
-
-::-moz-scrollbar {
-    width: 10px;
-    height: 12px;
-}
-::-moz-scrollbar-thumb {
-    background-color: #159957;
-    border-radius: 20px;
-    box-shadow: 1px -2px 0 black, 1px 2px 0 black;
-}
-::-moz-scrollbar-track {
-    background-color: #074023;
-}
-::-moz-scrollbar-button{
-	background: #159957;
-}
+			::-webkit-scrollbar {
+			    width: 10px;
+			    height: 12px;
+			}
+			::-webkit-scrollbar-thumb {
+			    background-color: #159957;
+			    border-radius: 20px;
+			}
+			::-webkit-scrollbar-track {
+			    background-color: #074023;
+			}
+			::-webkit-scrollbar-button{
+				background: #159957;
+			}
 
 
 
-::-ms-scrollbar {
-    width: 10px;
-    height: 12px;
-}
-::-ms-scrollbar-thumb {
-    background-color: #159957;
-    border-radius: 20px;
-    box-shadow: 1px -2px 0 black, 1px 2px 0 black;
-
-}
-::-ms-scrollbar-track {
-    background-color: #074023;
-}
-::-ms-scrollbar-button{
-	background: #159957;
-}
+			::-moz-scrollbar {
+			    width: 10px;
+			    height: 12px;
+			}
+			::-moz-scrollbar-thumb {
+			    background-color: #159957;
+			    border-radius: 20px;
+			}
+			::-moz-scrollbar-track {
+			    background-color: #074023;
+			}
+			::-moz-scrollbar-button{
+				background: #159957;
+			}
 
 
 
-::-o-scrollbar {
-    width: 10px;
-    height: 12px;
-}
-::-o-scrollbar-thumb {
-    background-color: #159957;
-    border-radius: 20px;
-    box-shadow: 1px -2px 0 black, 1px 2px 0 black;
-}
-::-o-scrollbar-track {
-    background-color: #074023;
-}
-::-o-scrollbar-button{
-	background: #159957;
-}
+			::-ms-scrollbar {
+			    width: 10px;
+			    height: 12px;
+			}
+			::-ms-scrollbar-thumb {
+			    background-color: #159957;
+			    border-radius: 20px;
+
+			}
+			::-ms-scrollbar-track {
+			    background-color: #074023;
+			}
+			::-ms-scrollbar-button{
+				background: #159957;
+			}
 
 
+
+			::-o-scrollbar {
+			    width: 10px;
+			    height: 12px;
+			}
+			::-o-scrollbar-thumb {
+			    background-color: #159957;
+			    border-radius: 20px;
+			}
+			::-o-scrollbar-track {
+			    background-color: #074023;
+			}
+			::-o-scrollbar-button{
+				background: #159957;
+			}
 		</style>
-		<h1 align="center" class="titulo">Controle de estabelecimentos</h1>
+		<h1 align="center" class="titulo">Estabelecimentos</h1>
 		<?php
 			require_once "controller/estabelecimento.php";
 			require_once "controller/estado.php";
@@ -229,7 +267,11 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 		<script type="text/javascript">
-			$(() => copiarTopo());
+			$(() => {
+				copiarTopo();
+				$(window).scroll();
+				$('div:has(a[title^="Hosted on free web"])').remove();
+			});
 			$(window).resize(() => corrigirTopoFixo())
 
 			function corrigirTopoFixo(){
@@ -242,13 +284,15 @@
 
 			function copiarTopo(){
 				$('.topoFixo').remove();
+				c = $('#tblEstabelecimento thead').clone(true).html();
 				$('#tblEstabelecimento').before("<div class=\"topoFixo\" hidden=\"\">"+
 													"<table width=\"100%\">"+
 														"<thead>"+
-															$('#tblEstabelecimento thead').clone().html()+
+															c.replace(/="checkOrdenar"/g, '="checkOrdenarT"')+
 														"</thead>"+
 													"</table>"+
 												"</div>");
+				$('#tblEstabelecimento thead').html(c);
 				corrigirTopoFixo();
 			}
 
@@ -257,7 +301,24 @@
 			})
 
 			$('#btnNovo').click(() => exibirEstabelecimento(0));
-			$('#selStatus').change(() => atualizarEstabelecimentos());
+			$('body').on('change', '#selStatus', () => atualizarEstabelecimentos());
+			$('body').on('click', 'th:has([name="checkOrdenar"])', function(){
+				i = $(this).find('input');
+				if (!i.is(':checked')) {
+					i.prop('checked', true);
+				}
+				else{
+					i.attr("desc", (i.attr("desc") == "0" ? "1" : "0"))
+				}
+				atualizarEstabelecimentos();
+			})
+			$('body').on('click', 'th:has([name="checkOrdenarT"])', function(){
+				$('[name="checkOrdenar"][value="'+$(this).find('input').val()+'"]').click();
+			})
+			// $('body').on('change', '#selStatus, [name="checkOrdenar"]', () => atualizarEstabelecimentos());
+			// $('body').on('change', '[name="checkOrdenarT"]', function(){
+			// 	$('[name="checkOrdenar"][value="'+$(this).val()+'"]').prop('checked', true).change();
+			// })
 
 			function mascaraAgenciaConta(){
 				$('[name^="txtAgencia"]').mask('999-9');
@@ -282,14 +343,22 @@
 			}
 
 			function atualizarEstabelecimentos(){
+				o = $('[name="checkOrdenar"]:checked');
+				if (o.length) {
+					ordenar = '&' + o.serialize() + '&desc=' + o.attr('desc')
+				}
+				else{
+					ordenar = '';
+				}
 				$.ajax({
 					type: 'post',
 					url: 'ajax_estabelecimento.php',
-					data: 'acao=3&' + $('#selStatus').serialize(),
+					data: 'acao=3&' + $('#selStatus').serialize() + ordenar,
 					success: (html) => {
 						$('#listaEstabelecimento').html(html)
 						setTimeout(function() {
 							copiarTopo();
+							$(window).scroll();
 						}, 100);
 					}
 				})	

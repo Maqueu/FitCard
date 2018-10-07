@@ -8,19 +8,98 @@
 			$estabelecimento = New Estabelecimento();
 			$estabelecimento->setAtivo($status);
 
+			$input = [];
+			for ($i=0; $i < 5; $i++) { 
+				$input[] = [
+					'check' => '',
+					'desc' => 0
+				];
+			}
+
+			$ordenar = (isset($_POST['checkOrdenar']) ? $_POST['checkOrdenar'] : 0);
+			$desc = (isset($_POST['desc']) ? $_POST['desc'] : 0);
+
+			$input[$ordenar]['check'] = "checked=\"\"";
+			$input[$ordenar]['desc'] = $desc;
+
 			$html = 	"<table width=\"100%\" id=\"tblEstabelecimento\">
 							<thead>
 								<tr>
-									<th align=\"left\" width=\"50%\" class=\"tresPontinhos\">Razão Social</th>
-									<th align=\"left\" width=\"50%\" class=\"tresPontinhos\">Nome fantasia</th>
-									<th align=\"left\" width=\"160\" class=\"tresPontinhos\">CNPJ</th>
-									<th align=\"left\" width=\"130\" class=\"tresPontinhos\">Categoria</th>
-									<th align=\"left\" width=\"130\">Ag Cc</th>
+									<th align=\"left\" width=\"50%\" class=\"tresPontinhos\">
+										Razão Social
+										<input type=\"radio\" name=\"checkOrdenar\" hidden=\"\" desc=\"".$input[0]['desc']."\" ".$input[0]['check']." value=\"0\">
+										<i>^</i>
+									</th>
+									<th align=\"left\" width=\"50%\" class=\"tresPontinhos\">
+										Nome fantasia
+										<input type=\"radio\" name=\"checkOrdenar\" hidden=\"\" desc=\"".$input[1]['desc']."\" ".$input[1]['check']." value=\"1\">
+										<i>^</i>
+									</th>
+									<th align=\"left\" width=\"160\" class=\"tresPontinhos\">
+										CNPJ
+										<input type=\"radio\" name=\"checkOrdenar\" hidden=\"\" desc=\"".$input[2]['desc']."\" ".$input[2]['check']." value=\"2\">
+										<i>^</i>
+									</th>
+									<th align=\"left\" width=\"130\" class=\"tresPontinhos\">
+										Categoria
+										<input type=\"radio\" name=\"checkOrdenar\" hidden=\"\" desc=\"".$input[3]['desc']."\" ".$input[3]['check']." value=\"3\">
+										<i>^</i>
+									</th>
+									<th align=\"left\" width=\"130\">
+										Ag Cc
+										<input type=\"radio\" name=\"checkOrdenar\" hidden=\"\" desc=\"".$input[4]['desc']."\" ".$input[4]['check']." value=\"4\">
+										<i>^</i>
+									</th>
 								</tr>
 							</thead>
 							<tbody>";
-			$e = $estabelecimento->listarEstabelecimentos();
+			$e = $estabelecimento->listarEstabelecimentos($ordenar, $desc);
 			if ($e) {
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
 				foreach ($e as $v) {
 					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
 									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>

@@ -17,11 +17,11 @@
 		<input type="hidden" name="idEstabelecimento" value="<?= $id ?>">
 		<div class="col-md-6">
 			<label for="txtRazao">Razao Social</label>
-			<input type="text" class="form-control" name="txtRazao" id="txtRazao" value="<?= $d->razaoSocial ?>">
+			<input type="text" class="form-control" maxlength="150" name="txtRazao" id="txtRazao" value="<?= $d->razaoSocial ?>">
 		</div>
 		<div class="col-md-6">
 			<label for="txtFantasia">Nome Fantasia</label>
-			<input type="text" class="form-control" name="txtFantasia" id="txtFantasia" value="<?= $d->nomeFantasia ?>">
+			<input type="text" class="form-control" maxlength="150" name="txtFantasia" id="txtFantasia" value="<?= $d->nomeFantasia ?>">
 		</div>
 		<div class="col-md-6">
 			<label for="txtCNPJ">CNPJ</label>
@@ -41,23 +41,23 @@
 		</div>
 		<div class="col-md-6">
 			<label for="txtCidade">Cidade</label>
-			<input type="text" class="form-control" name="txtCidade" id="txtCidade" value="<?= $d->cidade ?>">
+			<input type="text" class="form-control" maxlength="80" name="txtCidade" id="txtCidade" value="<?= $d->cidade ?>">
 		</div>
 		<div class="col-md-6">
 			<label for="txtRua">Rua</label>
-			<input type="text" class="form-control" name="txtRua" id="txtRua" value="<?= $d->rua ?>">
+			<input type="text" class="form-control" maxlength="100" name="txtRua" id="txtRua" value="<?= $d->rua ?>">
 		</div>
 		<div class="col-md-3">
 			<label for="txtNumero">Numero</label>
-			<input type="text" class="form-control" name="txtNumero" id="txtNumero" value="<?= $d->numero ?>">
+			<input type="number" class="form-control" step="1" min="0" max="9999999" name="txtNumero" id="txtNumero" value="<?= $d->numero ?>">
 		</div>
 		<div class="col-md-3">
 			<label for="txtComplemento">Complemento</label>
-			<input type="text" class="form-control" name="txtComplemento" id="txtComplemento" value="<?= $d->complemento ?>">
+			<input type="text" class="form-control" maxlength="70" name="txtComplemento" id="txtComplemento" value="<?= $d->complemento ?>">
 		</div>
 		<div class="col-md-6">
 			<label for="txtEmail">E-mail</label>
-			<input type="email" class="form-control" name="txtEmail" id="txtEmail" value="<?= $d->email ?>">
+			<input type="email" class="form-control" maxlength="100" name="txtEmail" id="txtEmail" value="<?= $d->email ?>">
 		</div>
 		<div class="col-md-6">
 			<label for="txtTelefone">Telefone</label>
@@ -235,6 +235,7 @@
 	$('#btnConta').click(() => addConta());
 	addConta = () => {
 		$('#listaContas').append($('#modeloConta').html());
+		$('#listaContas [name^="txtAgencia"]:last').focus();
 		mascaraAgenciaConta();
 	};
 

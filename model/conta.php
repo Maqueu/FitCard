@@ -64,7 +64,7 @@
 						$que_updConta->bindParam('id', $this->id[$k], PDO:: PARAM_INT);
 
 						if (!$que_updConta->execute()) {
-							die("Erro ao cadastrar contas 2");
+							die("Erro ao alterar contas");
 						}
 					}
 				}
