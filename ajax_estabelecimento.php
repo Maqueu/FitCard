@@ -20,7 +20,7 @@
 		break;
 
 		case 3:
-			echo EstabelecimentoController::listarEstabelecimentos();
+			echo EstabelecimentoController::listarEstabelecimentos((isset($_POST['selStatus']) ? $_POST['selStatus'] : 1));
 		break;
 
 		case 4: // Buscar dados

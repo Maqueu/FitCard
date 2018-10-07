@@ -3,8 +3,9 @@
 
 	class ContaController{
 
-		function alterarContas($estabelecimento, $agencia, $contaP){
+		function alterarContas($estabelecimento, $id, $agencia, $contaP){
 			$conta = New Conta();
+			$conta->setId($id);
 			$conta->setAgencia($agencia);
 			$conta->setConta($contaP);
 			$conta->setEstabelecimento($estabelecimento);
@@ -30,6 +31,14 @@
 			}
 
 			return $html;
+		}
+
+		function deletar($estabelecimento, $id){
+			$conta = New Conta();
+			$conta->setEstabelecimento($estabelecimento);
+			$conta->setId($id);
+
+			return $conta->deletar();
 		}
 	}
 ?>

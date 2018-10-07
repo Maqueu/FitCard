@@ -14,6 +14,7 @@
 		private $estado = null;
 		private $categoria = null;
 		private $cnpj;
+		private $ativo;
 
 		function setId($id){$this->id = $id;}
 		function getId(){return $this->id;}
@@ -51,7 +52,11 @@
 		function setCNPJ($cnpj){$this->cnpj = $cnpj;}
 		function getCNPJ(){return $this->cnpj;}
 
+		function setAtivo($ativo){$this->ativo = $ativo;}
+		function getAtivo(){return $this->ativo;}
+
 		function listarEstabelecimentos(){
+			$where = ($this->ativo != -1 ? "AND ativo = :ativo" : "");
 			$sql_selEstabelecimento = "SELECT 	id,
 												razaoSocial,
 												nomeFantasia,
@@ -60,17 +65,25 @@
 										        (
 										        	SELECT 	GROUP_CONCAT(
 										        				CONCAT(
-										        					'<div>', agencia, ' ', conta, '</div>'
+										        					'<div class=''agenciaConta tresPontinhos''>', 
+										        					agencia, 
+										        					' ', 
+										        					conta, 
+										        					'</div>'
 										        				) ORDER BY agencia, conta SEPARATOR ' '
 										        			)
 										        		FROM fit_contas c 
 										        		WHERE c.idEstabelecimento = e.id
 										        ) contas
 											FROM fit_estabelecimentos e
+											WHERE 1 = 1 {$where}
 										    ORDER BY razaoSocial";
 
 			global $conn;
 			$que_selEstabelecimento = $conn->prepare($sql_selEstabelecimento);
+			if ($this->ativo != -1) {
+				$que_selEstabelecimento->bindParam('ativo', $this->ativo, PDO:: PARAM_INT);
+			}
 			$que_selEstabelecimento->execute();
 
 			return $que_selEstabelecimento->fetchAll();
@@ -78,6 +91,7 @@
 
 		function buscarDados(){
 			$sql_selDados = "SELECT siglaEstado,
+									idCategoria,
 									razaoSocial,
 							        nomeFantasia,
 							        cnpj,

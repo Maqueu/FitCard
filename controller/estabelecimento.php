@@ -4,17 +4,18 @@
 
 	class EstabelecimentoController{
 
-		static function listarEstabelecimentos(){
+		static function listarEstabelecimentos($status = 1){
 			$estabelecimento = New Estabelecimento();
+			$estabelecimento->setAtivo($status);
 
-			$html = 	"<table width=\"100%\">
+			$html = 	"<table width=\"100%\" id=\"tblEstabelecimento\">
 							<thead>
 								<tr>
-									<th align=\"left\">Razão Social</th>
-									<th align=\"left\">Nome fantasia</th>
-									<th align=\"left\">CNPJ</th>
-									<th align=\"left\">Categoria</th>
-									<th align=\"left\">Ag Cc</th>
+									<th align=\"left\" width=\"50%\" class=\"tresPontinhos\">Razão Social</th>
+									<th align=\"left\" width=\"50%\" class=\"tresPontinhos\">Nome fantasia</th>
+									<th align=\"left\" width=\"160\" class=\"tresPontinhos\">CNPJ</th>
+									<th align=\"left\" width=\"130\" class=\"tresPontinhos\">Categoria</th>
+									<th align=\"left\" width=\"130\">Ag Cc</th>
 								</tr>
 							</thead>
 							<tbody>";
@@ -22,10 +23,109 @@
 			if ($e) {
 				foreach ($e as $v) {
 					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
-									<td>".$v['razaoSocial']."</td>
-									<td>".$v['nomeFantasia']."</td>
-									<td>".$v['cnpj']."</td>
-									<td>".$v['categoria']."</td>
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
+									<td>".$v['contas']."</td>
+								</tr>";
+				}
+				foreach ($e as $v) {
+					$html .=	"<tr id=\"trEstabelecimento".$v['id']."\">
+									<td class=\"tresPontinhos\">".$v['razaoSocial']."</td>
+									<td class=\"tresPontinhos\">".$v['nomeFantasia']."</td>
+									<td class=\"tresPontinhos\">".$v['cnpj']."</td>
+									<td class=\"tresPontinhos\">".$v['categoria']."</td>
 									<td>".$v['contas']."</td>
 								</tr>";
 				}
@@ -46,6 +146,8 @@
 			if ($id == 0) {
 				$d = New StdClass();
 				$d->siglaEstado = "0";
+				$d->ativo = 1;
+				$d->idCategoria = null;
 				$d->razaoSocial = $d->nomeFantasia = $d->cnpj = $d->email = $d->rua = $d->numero = 
 				$d->complemento = $d->cidade = $d->dataCadastro = $d->horaCadastro = $d->telefone = "";
 			}
@@ -126,9 +228,14 @@
 
 			}
 
-			if (isset($_POST['txtAgencia']) && isset($_POST['txtConta'])) {
+			if (isset($_POST['txtAgencia']) && isset($_POST['txtConta']) && isset($_POST['idConta'])) {
 				$conta = New ContaController();
-				return $conta->alterarContas($estabelecimento->getId(), $_POST['txtAgencia'], $_POST['txtConta']);
+				return 	$conta->alterarContas(
+							$estabelecimento->getId(),
+							$_POST['idConta'],
+							$_POST['txtAgencia'],
+							$_POST['txtConta']
+						);
 			}
 			return 1;
 

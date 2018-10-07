@@ -84,8 +84,8 @@ ENGINE = InnoDB;
 CREATE TABLE `fitcard`.`fit_contas` (
     `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `idEstabelecimento` INT(11) NOT NULL,
-    `agencia` CHAR(8) NOT NULL,
-    `conta` CHAR(5) NOT NULL,
+    `agencia` CHAR(5) NOT NULL,
+    `conta` CHAR(8) NOT NULL,
     INDEX `FK_contas_estabelecimento_idx` (`idEstabelecimento` ASC),
     CONSTRAINT `FK_contas_estabelecimento`
         FOREIGN KEY (`idEstabelecimento`)

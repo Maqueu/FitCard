@@ -12,57 +12,59 @@
 	}
 ?>
 <form id="frmEstabelecimento">
-	<input type="hidden" name="acao" value="2">
-	<input type="hidden" name="idEstabelecimento" value="<?= $id ?>">
-	<div>
-		<label for="selEstado">Estado</label>
-		<select id="selEstado" name="selEstado">
-			<?= EstadoController::listarEstados($d->siglaEstado) ?>
-		</select>
+	<div class="row">
+		<input type="hidden" name="acao" value="2">
+		<input type="hidden" name="idEstabelecimento" value="<?= $id ?>">
+		<div class="col-md-6">
+			<label for="txtRazao">Razao Social</label>
+			<input type="text" class="form-control" name="txtRazao" id="txtRazao" value="<?= $d->razaoSocial ?>">
+		</div>
+		<div class="col-md-6">
+			<label for="txtFantasia">Nome Fantasia</label>
+			<input type="text" class="form-control" name="txtFantasia" id="txtFantasia" value="<?= $d->nomeFantasia ?>">
+		</div>
+		<div class="col-md-6">
+			<label for="txtCNPJ">CNPJ</label>
+			<input type="text" class="form-control" name="txtCNPJ" id="txtCNPJ" value="<?= $d->cnpj ?>">
+		</div>
+		<div class="col-md-6">
+			<label for="selCategoria">Categoria</label>
+			<select id="selCategoria" class="form-control" name="selCategoria">
+				<?= CategoriaController::listarCategorias($d->idCategoria) ?>
+			</select>
+		</div>
+		<div class="col-md-6">
+			<label for="selEstado">Estado</label>
+			<select id="selEstado" class="form-control" name="selEstado">
+				<?= EstadoController::listarEstados($d->siglaEstado) ?>
+			</select>
+		</div>
+		<div class="col-md-6">
+			<label for="txtCidade">Cidade</label>
+			<input type="text" class="form-control" name="txtCidade" id="txtCidade" value="<?= $d->cidade ?>">
+		</div>
+		<div class="col-md-6">
+			<label for="txtRua">Rua</label>
+			<input type="text" class="form-control" name="txtRua" id="txtRua" value="<?= $d->rua ?>">
+		</div>
+		<div class="col-md-3">
+			<label for="txtNumero">Numero</label>
+			<input type="text" class="form-control" name="txtNumero" id="txtNumero" value="<?= $d->numero ?>">
+		</div>
+		<div class="col-md-3">
+			<label for="txtComplemento">Complemento</label>
+			<input type="text" class="form-control" name="txtComplemento" id="txtComplemento" value="<?= $d->complemento ?>">
+		</div>
+		<div class="col-md-6">
+			<label for="txtEmail">E-mail</label>
+			<input type="email" class="form-control" name="txtEmail" id="txtEmail" value="<?= $d->email ?>">
+		</div>
+		<div class="col-md-6">
+			<label for="txtTelefone">Telefone</label>
+			<input type="text" class="form-control" name="txtTelefone" id="txtTelefone" value="<?= $d->telefone ?>">
+		</div>
+		<hr>
 	</div>
-	<div>
-		<label for="txtRazao">Razao Social</label>
-		<input type="text" name="txtRazao" id="txtRazao" value="<?= $d->razaoSocial ?>">
-	</div>
-	<div>
-		<label for="txtFantasia">Nome Fantasia</label>
-		<input type="text" name="txtFantasia" id="txtFantasia" value="<?= $d->nomeFantasia ?>">
-	</div>
-	<div>
-		<label for="txtCNPJ">CNPJ</label>
-		<input type="text" name="txtCNPJ" id="txtCNPJ" value="<?= $d->cnpj ?>">
-	</div>
-	<div>
-		<label for="selCategoria">Categoria</label>
-		<select id="selCategoria" name="selCategoria">
-			<?= CategoriaController::listarCategorias($d->idCategoria) ?>
-		</select>
-	</div>
-	<div>
-		<label for="txtEmail">E-mail</label>
-		<input type="email" name="txtEmail" id="txtEmail" value="<?= $d->email ?>">
-	</div>
-	<div>
-		<label for="txtRua">Rua</label>
-		<input type="text" name="txtRua" id="txtRua" value="<?= $d->rua ?>">
-	</div>
-	<div>
-		<label for="txtNumero">Numero</label>
-		<input type="text" name="txtNumero" id="txtNumero" value="<?= $d->numero ?>">
-	</div>
-	<div>
-		<label for="txtComplemento">Complemento</label>
-		<input type="text" name="txtComplemento" id="txtComplemento" value="<?= $d->complemento ?>">
-	</div>
-	<div>
-		<label for="txtTelefone">Telefone</label>
-		<input type="text" name="txtTelefone" id="txtTelefone" value="<?= $d->telefone ?>">
-	</div>
-	<div>
-		<label for="txtCidade">Cidade</label>
-		<input type="text" name="txtCidade" id="txtCidade" value="<?= $d->cidade ?>">
-	</div>
-	<hr>
 	<div id="listaContas">
 		<?php
 			if ($id != 0) {
@@ -70,14 +72,7 @@
 			}
 		?>
 	</div>
-	<button type="button" id="btnConta">+ Conta</button>
-	<button type="button" id="btnSalvar"><?= ($id == 0 ? "Cadastrar" : "Alterar") ?></button>
-	<?php
-		if ($id != 0) { ?>
-			<button type="button" id="btnAlterarStatus"><?= ($d->ativo ? "Deletar" : "Reativar") ?></button>
-	<?php
-		}
-	?>
+	<button type="button" id="btnConta" class="btn btn-primary">+ Conta</button>
 </form>
 <div id="modeloConta" hidden="">
 	<?php
@@ -91,15 +86,31 @@
 </div>
 <?php
 	if ($d->dataCadastro && $d->horaCadastro) { ?>
-		<div>Cadastrado: <?= date('d/m/Y', strtotime($d->dataCadastro)) ?> às <?= date('H:i:s', strtotime($d->horaCadastro)) ?></div>
+		<div align="center" style="font-style: italic;">Cadastrado: <?= date('d/m/Y', strtotime($d->dataCadastro)) ?> às <?= date('H:i:s', strtotime($d->horaCadastro)) ?></div>
 <?php
 	}
 ?>
 
 <script type="text/javascript">
 	$(() => {
-		$('#txtCNPJ').mask('00.000.000/0000-00');
+		$('#txtCNPJ').mask('99.999.999/9999-99');
 		$('#txtTelefone').mask('(99)99999-9999');
+		if (<?= $id ?> == 0) {
+			$('#btnAlterarStatus').remove();
+			$('#btnSalvar').html("Cadastrar");
+		}
+		else{
+			if (<?= $d->ativo ?>) {
+				status = "Deletar";
+				btn = "danger"
+			}
+			else{
+				status = "Reativar";
+				btn = "success";
+			}
+			$('#btnAlterarStatus').html(status).addClass('btn-' + btn);
+			$('#btnSalvar').html("Alterar");
+		}
 	});
 
 	function erroFormulario(texto, qual){
@@ -107,7 +118,9 @@
 			title: "Opps...", 
 			text: texto,
 			type: "error"
-		}).then(() => qual.focus())
+		}).then(() => {
+			setTimeout(() => qual.focus(), 300);
+		})
 	}
 
 	function isEmail(email) {
@@ -115,59 +128,82 @@
 	    return re.test(email);
 	}
 
-	$('#btnSalvar').click(function(){
-		if ($('#txtCNPJ').val().length < 18) {
-			erroFormulario('Preencha o CNPJ', $('#txtCNPJ'))
-			return;
-		}
+	$('body').off('click', '#btnSalvar').on('click', '#btnSalvar', function(){
+		erro = 0;
 
 		if ($('#txtRazao').val().trim() == '') {
 			erroFormulario('Preencha a Razão Social', $('#txtRazao'));
+			erro = 1;
 			return
 		}
 
-		if ($('#selCategoria').val() == 1 && $('#txtTelefone').val().length < 14) {
-			erroFormulario('Preencha o telefone', $('#txtTelefone'));
+		if ($('#txtCNPJ').val().length < 18) {
+			erroFormulario('Preencha o CNPJ', $('#txtCNPJ'))
+			erro = 1;
 			return;
 		}
 
 		if ($('#txtEmail').val().trim() != '' && !isEmail($('#txtEmail').val().trim())) {
 			erroFormulario('E-mail inválido', $('#txtEmail'));
+			erro = 1;
 			return;
 		}
 
-		$.ajax({
-			type: 'post',
-			url: 'ajax_estabelecimento.php',
-			data: $('#frmEstabelecimento').serialize(),
-			success: (erro) => {
-				if (erro == 1) {
-					$('#modal').html('');
-					swal({
-						title: "Sucesso",
-						text: "Dados " + (<?= $id ?> == 0 ? "cadastrados" : "alterados"),
-						type: "success"
-					}).then(() => atualizarEstabelecimentos());
-				}
-				else{
-					swal({
-						title: "Opps...", 
-						text: erro,
-						type: "error"
-					});
-				}
+		if ($('#selCategoria').val() == 1 && $('#txtTelefone').val().length < 14) {
+			erroFormulario('Preencha o telefone', $('#txtTelefone'));
+			erro = 1;
+			return;
+		}
+
+		$('#listaContas .remover').each(function(){
+			if ($(this).find('[name^="txtAgencia"]').val().length < 5) {
+				erroFormulario('Preencha a agencia', $(this).find('[name^="txtAgencia"]'));
+				erro = 1;
+				return;
 			}
-		})
+
+			if ($(this).find('[name^="txtConta"]').val().length < 8) {
+				erroFormulario('Preencha a conta', $(this).find('[name^="txtConta"]'));
+				erro = 1;
+				return;
+			}
+		});
+
+		if (erro == 0) {
+			$.ajax({
+				type: 'post',
+				url: 'ajax_estabelecimento.php',
+				data: $('#frmEstabelecimento').serialize(),
+				success: (erro) => {
+					if (erro == 1) {
+						// $('#modal').html('');
+						$('#modal').modal('hide');
+						swal({
+							title: "Sucesso",
+							text: "Dados " + (<?= $id ?> == 0 ? "cadastrados" : "alterados"),
+							type: "success"
+						}).then(() => atualizarEstabelecimentos());
+					}
+					else{
+						swal({
+							title: "Opps...", 
+							text: erro,
+							type: "error"
+						});
+					}
+				}
+			})
+		}
 	});
 
-	$('#btnAlterarStatus').click(function(){
+	$('body').off('click', '#btnAlterarStatus').on('click', '#btnAlterarStatus', function(){
 		swal({
-                title: 'Deletar',
-                text: "Deseja realmente deletar este estabelecimento?",
+                title: status,
+                text: "Deseja realmente " + status + " este estabelecimento?",
                 type: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#dc3545',
                 confirmButtonText: 'Sim',
                 cancelButtonText: 'Não',
             }
@@ -179,7 +215,8 @@
 					data: 'acao=5&id=' + <?= $id ?>,
 					success: (erro) => {
 						if (erro == 1) {
-							$('#modal').html('');
+							// $('#modal').html('');
+							$('#modal').modal('hide')
 							atualizarEstabelecimentos();
 						}
 						else{
@@ -196,9 +233,48 @@
 	})
 
 	$('#btnConta').click(() => addConta());
-	addConta = () => $('#listaContas').append($('#modeloConta').html());
+	addConta = () => {
+		$('#listaContas').append($('#modeloConta').html());
+		mascaraAgenciaConta();
+	};
 
-	$('body').on('click', '.btnRemover', function(){
-		$(this).parent('.remover').remove();
+	$('body').off('click', '.btnRemover').on('click', '.btnRemover', function(){
+		swal({
+                title: 'Deletar',
+                text: "Deseja realmente deletar esta conta?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#dc3545',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+            }
+        ).then((result) => {
+            if (result.value) {
+            	idConta = $(this).parents('.remover').find('[name^="idConta"]').val()
+            	if (idConta == 0){
+					$(this).parents('.remover').remove();
+            	}
+            	else{
+					$.ajax({
+						type: 'post',
+						url: 'ajax_conta.php',
+						data: 'acao=1&estabelecimento=' + <?= $id ?> + '&conta=' + idConta,
+						success: (erro) => {
+							if (erro == 1) {
+								$(this).parents('.remover').remove();
+							}
+							else{
+								swal({
+									title: "Opps...", 
+									text: erro,
+									type: "error"
+								})
+							}
+						}
+					})
+            	}
+            }
+        })
 	})
 </script>
